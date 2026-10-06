@@ -7,8 +7,8 @@ html,body{
   color:#111;
   font-family:Arial,Helvetica,sans-serif;
 }
-body{overflow:hidden;cursor:none}
-a,button{font:inherit;color:inherit;cursor:none}
+body{overflow:hidden;cursor:default}
+a,button{font:inherit;color:inherit;cursor:pointer}
 .stage{
   position:relative;
   width:100vw;
@@ -104,8 +104,6 @@ a,button{font:inherit;color:inherit;cursor:none}
   opacity:1;
   transform:translate(-50%,0);
 }
-
-/* Coordinates tuned to the supplied composition */
 .photo{left:5.2%;top:6.8%;width:10.3%;height:27.5%}
 .cv{left:20.8%;top:5.6%;width:12.6%;height:31.8%}
 .behance{left:4.2%;top:42.5%;width:13.2%;height:22.5%}
@@ -115,7 +113,6 @@ a,button{font:inherit;color:inherit;cursor:none}
 .portfolio{left:36.4%;bottom:4.4%;width:28.5%;height:35.5%}
 .map{left:43.5%;top:4%;width:53%;height:49%}
 .clock{right:3.8%;bottom:5.1%;width:10.3%;height:13%}
-
 .clock-text{
   position:absolute;
   inset:0;
@@ -129,7 +126,6 @@ a,button{font:inherit;color:inherit;cursor:none}
   letter-spacing:.06em;
   pointer-events:none;
 }
-
 .panel{
   position:fixed;
   z-index:100;
@@ -166,37 +162,10 @@ a,button{font:inherit;color:inherit;cursor:none}
 .panel h2{font-size:14px;margin:24px 0 8px;letter-spacing:.12em;text-transform:uppercase}
 .panel p,.panel li,.panel a{font-size:15px;line-height:1.7}
 .panel a{color:inherit}
-.meta{
-  display:grid;
-  grid-template-columns:90px 1fr;
-  gap:8px 14px;
-  margin-top:18px;
-}
+.meta{display:grid;grid-template-columns:90px 1fr;gap:8px 14px;margin-top:18px}
 .meta dt{font-size:13px;opacity:.5}
 .meta dd{font-size:14px;margin:0}
-
-.cursor-dot{
-  position:fixed;
-  z-index:9999;
-  left:0;top:0;
-  width:14px;height:14px;
-  border-radius:50%;
-  background:rgba(255,255,255,.98);
-  box-shadow:0 0 0 1px rgba(0,0,0,.08),0 3px 12px rgba(0,0,0,.14);
-  transform:translate(-50%,-50%);
-  pointer-events:none;
-  transition:width .16s ease,height .16s ease,opacity .16s ease;
-}
-.cursor-dot.hovering{width:20px;height:20px}
-.cursor-dot.hidden{opacity:0}
-
-@media (hover:none),(pointer:coarse){
-  body,a,button{cursor:auto}
-  .cursor-dot{display:none}
-}
-
-
-/* In-page PDF viewer */
+.cursor-dot{display:none!important}
 .pdf-modal{
   position:fixed;
   inset:0;
@@ -212,10 +181,7 @@ a,button{font:inherit;color:inherit;cursor:none}
   pointer-events:none;
   transition:opacity .25s ease;
 }
-.pdf-modal.open{
-  opacity:1;
-  pointer-events:auto;
-}
+.pdf-modal.open{opacity:1;pointer-events:auto}
 .pdf-shell{
   width:min(1040px,92vw);
   height:min(90vh,920px);
@@ -228,9 +194,7 @@ a,button{font:inherit;color:inherit;cursor:none}
   transform:translateY(14px) scale(.985);
   transition:transform .28s cubic-bezier(.2,.8,.2,1);
 }
-.pdf-modal.open .pdf-shell{
-  transform:translateY(0) scale(1);
-}
+.pdf-modal.open .pdf-shell{transform:translateY(0) scale(1)}
 .pdf-toolbar{
   min-height:58px;
   display:flex;
@@ -243,18 +207,9 @@ a,button{font:inherit;color:inherit;cursor:none}
   backdrop-filter:blur(12px);
   -webkit-backdrop-filter:blur(12px);
 }
-.pdf-title{
-  font-size:14px;
-  font-weight:700;
-  letter-spacing:.11em;
-}
-.pdf-actions{
-  display:flex;
-  align-items:center;
-  gap:7px;
-}
-.pdf-actions button,
-#pdfZoomLabel{
+.pdf-title{font-size:14px;font-weight:700;letter-spacing:.11em}
+.pdf-actions{display:flex;align-items:center;gap:7px}
+.pdf-actions button,#pdfZoomLabel{
   min-width:36px;
   height:36px;
   display:flex;
@@ -270,38 +225,16 @@ a,button{font:inherit;color:inherit;cursor:none}
 }
 #pdfZoomLabel{min-width:58px;padding:0 8px}
 #pdfClose{font-size:22px;line-height:1}
-.pdf-stage{
-  position:relative;
-  flex:1;
-  overflow:auto;
-  background:#d8d4cb;
-}
-#pdfFrame{
-  display:block;
-  width:100%;
-  height:100%;
-  border:0;
-  background:white;
-  transform-origin:top center;
-}
-body.pdf-open .cursor-dot{z-index:9999}
+.pdf-stage{position:relative;flex:1;overflow:auto;background:#d8d4cb}
+#pdfFrame{display:block;width:100%;height:100%;border:0;background:white;transform-origin:top center}
 @media (max-width:800px){
   .pdf-modal{padding:12px}
   .pdf-shell{width:100%;height:94vh;border-radius:18px}
   .pdf-title{font-size:12px}
   .pdf-actions{gap:5px}
 }
-
-
-/* User-requested refinements */
-.photo:hover{
-  transform:none !important;
-  filter:none !important;
-  z-index:10;
-}
-.photo .hover-label{
-  display:none !important;
-}
+.photo:hover{transform:none!important;filter:none!important;z-index:10}
+.photo .hover-label{display:none!important}
 .clock-text{
   inset:auto;
   left:31%;
