@@ -22,7 +22,24 @@
     <button class="asset map" data-action="map" aria-label="My path"><img src="./assets/map sketch.png" alt="Map sketch" /><span class="hover-label">MY PATH</span></button>
     <div class="asset clock" aria-label="Current time"><img src="./assets/clock.png" alt="Clock" /><span class="clock-text" id="clockText"></span><span class="hover-label">LOCAL TIME</span></div>
     <section class="panel" id="panel" aria-hidden="true"><button class="panel-close" id="panelClose">×</button><div id="panelContent"></div></section>
-    <section class="pdf-modal" id="pdfModal" aria-hidden="true"><div class="pdf-shell"><div class="pdf-toolbar"><div class="pdf-title" id="pdfTitle">DOCUMENT</div><div class="pdf-actions"><button id="pdfZoomOut" aria-label="Zoom out">−</button><span id="pdfZoomLabel">100%</span><button id="pdfZoomIn" aria-label="Zoom in">+</button><button id="pdfFit" aria-label="Fit document">FIT</button><button id="pdfClose" aria-label="Close PDF">×</button></div></div><div class="pdf-stage"><iframe id="pdfFrame" title="PDF viewer"></iframe></div></div></section>
+    <section class="pdf-modal" id="pdfModal" aria-hidden="true">
+      <div class="pdf-shell">
+        <div class="pdf-toolbar">
+          <div class="pdf-title" id="pdfTitle">DOCUMENT</div>
+          <div class="pdf-actions">
+            <button id="pdfZoomOut" aria-label="Zoom out">−</button>
+            <span id="pdfZoomLabel">100%</span>
+            <button id="pdfZoomIn" aria-label="Zoom in">+</button>
+            <button id="pdfFit" aria-label="Fit document">FIT</button>
+            <button id="pdfClose" aria-label="Close PDF">×</button>
+          </div>
+        </div>
+        <div class="pdf-stage" id="pdfStage">
+          <div class="pdf-loading" id="pdfLoading">LOADING DOCUMENT…</div>
+          <div class="pdf-pages" id="pdfPages" aria-label="View-only PDF preview"></div>
+        </div>
+      </div>
+    </section>
     <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
   </main>
   <script type="module" src="./profile.js"></script>
