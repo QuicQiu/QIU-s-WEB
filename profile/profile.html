@@ -5,93 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Qiuchen Shen — Profile</title>
   <link rel="stylesheet" href="./profile.css" />
+  <link rel="stylesheet" href="/mobile.css" />
 </head>
-<body>
+<body class="profile-page">
   <main class="stage">
     <img class="background" src="./assets/background.png" alt="" />
-
-    <nav class="top-nav">
-      <a href="/">QS</a>
-      <a href="/">HOME</a>
-      <button class="active">PROFILE</button>
-      <a href="/skills/skills.html">SKILLS</a>
-      <a href="/projects/index.html">WORK</a>
-    </nav>
-
+    <nav class="top-nav"><a href="/">QS</a><a href="/">HOME</a><button class="active">PROFILE</button><a href="/skills/skills.html">SKILLS</a><a href="/projects/index.html">WORK</a></nav>
     <button class="back-scene" id="backScene">BACK TO SCENE ×</button>
-
-    <button class="asset photo" data-action="about" aria-label="About">
-      <img src="./assets/photo.png" alt="Portrait" />
-      <span class="hover-label">ABOUT</span>
-    </button>
-
-    <button class="asset cv" data-action="cv" aria-label="Open CV">
-      <img src="./assets/CV.png" alt="CV" />
-      <span class="hover-label">OPEN CV</span>
-    </button>
-
-    <button class="asset behance" data-action="behance" aria-label="Behance">
-      <img src="./assets/behance.png" alt="Behance" />
-      <span class="hover-label">BEHANCE · SOON</span>
-    </button>
-
-    <a class="asset linkedin" href="https://www.linkedin.com/in/qiuchen-shen-b33b96351?utm_source=share_via&utm_content=profile&utm_medium=member_ios" target="_blank" rel="noreferrer">
-      <img src="./assets/linkdlin.png" alt="LinkedIn" />
-      <span class="hover-label">LINKEDIN ↗</span>
-    </a>
-
-    <button class="asset contact" data-action="contact" aria-label="Contact">
-      <img src="./assets/contact.png" alt="Contact" />
-      <span class="hover-label">CONTACT</span>
-    </button>
-
-    <button class="asset profile" data-action="profile" aria-label="Profile">
-      <img src="./assets/profile.png" alt="Profile" />
-      <span class="hover-label">PROFILE</span>
-    </button>
-
-    <button class="asset portfolio" data-action="portfolio" aria-label="Portfolio">
-      <img src="./assets/portfolio.png" alt="Portfolio" />
-      <span class="hover-label">VIEW WORK</span>
-    </button>
-
-    <button class="asset map" data-action="map" aria-label="My path">
-      <img src="./assets/map sketch.png" alt="Map sketch" />
-      <span class="hover-label">MY PATH</span>
-    </button>
-
-    <div class="asset clock" aria-label="Current time">
-      <img src="./assets/clock.png" alt="Clock" />
-      <span class="clock-text" id="clockText"></span>
-      <span class="hover-label">LOCAL TIME</span>
-    </div>
-
-    <section class="panel" id="panel" aria-hidden="true">
-      <button class="panel-close" id="panelClose">×</button>
-      <div id="panelContent"></div>
-    </section>
-
-    <section class="pdf-modal" id="pdfModal" aria-hidden="true">
-      <div class="pdf-shell">
-        <div class="pdf-toolbar">
-          <div class="pdf-title" id="pdfTitle">DOCUMENT</div>
-          <div class="pdf-actions">
-            <button id="pdfZoomOut" aria-label="Zoom out">−</button>
-            <span id="pdfZoomLabel">100%</span>
-            <button id="pdfZoomIn" aria-label="Zoom in">+</button>
-            <button id="pdfFit" aria-label="Fit document">FIT</button>
-            <button id="pdfClose" aria-label="Close PDF">×</button>
-          </div>
-        </div>
-        <div class="pdf-stage">
-          <iframe id="pdfFrame" title="PDF viewer"></iframe>
-        </div>
-      </div>
-    </section>
-
+    <button class="asset photo" data-action="about" aria-label="About"><img src="./assets/photo.png" alt="Portrait" /><span class="hover-label">ABOUT</span></button>
+    <button class="asset cv" data-action="cv" aria-label="Open CV"><img src="./assets/CV.png" alt="CV" /><span class="hover-label">OPEN CV</span></button>
+    <button class="asset behance" data-action="behance" aria-label="Behance"><img src="./assets/behance.png" alt="Behance" /><span class="hover-label">BEHANCE · SOON</span></button>
+    <a class="asset linkedin" href="https://www.linkedin.com/in/qiuchen-shen-b33b96351?utm_source=share_via&utm_content=profile&utm_medium=member_ios" target="_blank" rel="noreferrer"><img src="./assets/linkdlin.png" alt="LinkedIn" /><span class="hover-label">LINKEDIN ↗</span></a>
+    <button class="asset contact" data-action="contact" aria-label="Contact"><img src="./assets/contact.png" alt="Contact" /><span class="hover-label">CONTACT</span></button>
+    <button class="asset profile" data-action="profile" aria-label="Profile"><img src="./assets/profile.png" alt="Profile" /><span class="hover-label">PROFILE</span></button>
+    <button class="asset portfolio" data-action="portfolio" aria-label="Portfolio"><img src="./assets/portfolio.png" alt="Portfolio" /><span class="hover-label">VIEW WORK</span></button>
+    <button class="asset map" data-action="map" aria-label="My path"><img src="./assets/map sketch.png" alt="Map sketch" /><span class="hover-label">MY PATH</span></button>
+    <div class="asset clock" aria-label="Current time"><img src="./assets/clock.png" alt="Clock" /><span class="clock-text" id="clockText"></span><span class="hover-label">LOCAL TIME</span></div>
+    <section class="panel" id="panel" aria-hidden="true"><button class="panel-close" id="panelClose">×</button><div id="panelContent"></div></section>
+    <section class="pdf-modal" id="pdfModal" aria-hidden="true"><div class="pdf-shell"><div class="pdf-toolbar"><div class="pdf-title" id="pdfTitle">DOCUMENT</div><div class="pdf-actions"><button id="pdfZoomOut" aria-label="Zoom out">−</button><span id="pdfZoomLabel">100%</span><button id="pdfZoomIn" aria-label="Zoom in">+</button><button id="pdfFit" aria-label="Fit document">FIT</button><button id="pdfClose" aria-label="Close PDF">×</button></div></div><div class="pdf-stage"><iframe id="pdfFrame" title="PDF viewer"></iframe></div></div></section>
     <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
   </main>
-
   <script src="./profile.js"></script>
 </body>
 </html>
