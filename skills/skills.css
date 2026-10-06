@@ -1,0 +1,288 @@
+*{box-sizing:border-box}
+html,body{
+  margin:0;
+  width:100%;
+  height:100%;
+  background:#f3efe6;
+  color:#111;
+  font-family:Arial,Helvetica,sans-serif;
+}
+body{overflow:hidden;cursor:none}
+a,button{font:inherit;color:inherit;cursor:none}
+
+.stage{
+  position:relative;
+  width:100vw;
+  height:100vh;
+  overflow:hidden;
+  background:#f3efe6;
+  transition:filter .35s ease;
+}
+
+.background{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  user-select:none;
+  pointer-events:none;
+}
+
+
+.top-nav{
+  position:fixed;
+  z-index:50;
+  left:22px;
+  top:20px;
+  display:flex;
+  gap:10px;
+  align-items:center;
+  padding:9px 13px;
+  border-radius:999px;
+  background:rgba(255,255,255,.72);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+}
+.top-nav a,.top-nav button,.back-scene{
+  border:0;
+  background:transparent;
+  text-decoration:none;
+  font-size:14px;
+  font-weight:500;
+  letter-spacing:.11em;
+}
+.top-nav .active{font-weight:700}
+
+.back-scene{
+  position:fixed;
+  z-index:50;
+  right:24px;
+  top:22px;
+  padding:10px 14px;
+  border-radius:999px;
+  background:rgba(255,255,255,.72);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+}
+
+.asset{
+  position:absolute;
+  z-index:10;
+  border:0;
+  padding:0;
+  background:transparent;
+  transform-origin:center;
+  transition:transform .22s ease, filter .22s ease;
+}
+.asset img{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:contain;
+  pointer-events:none;
+  user-select:none;
+}
+.asset:hover{
+  transform:translateY(-5px) scale(1.035);
+  filter:drop-shadow(0 12px 18px rgba(0,0,0,.12));
+  z-index:20;
+}
+
+.hover-label{
+  position:absolute;
+  left:50%;
+  bottom:-31px;
+  transform:translate(-50%,8px);
+  opacity:0;
+  white-space:nowrap;
+  padding:10px 15px;
+  border-radius:999px;
+  background:rgba(255,255,255,.72);
+  backdrop-filter:blur(9px);
+  -webkit-backdrop-filter:blur(9px);
+  box-shadow:0 6px 24px rgba(0,0,0,.08);
+  font-size:14px;
+  font-weight:600;
+  letter-spacing:.11em;
+  pointer-events:none;
+  transition:.2s ease;
+}
+.asset:hover .hover-label{
+  opacity:1;
+  transform:translate(-50%,0);
+}
+
+/* composition tuned to reference */
+.skill1{left:2.6%;top:12.8%;width:21.5%;height:43.5%}
+.skill2{left:24%;top:5.5%;width:19%;height:32.5%}
+.skill3{left:35.5%;top:31%;width:22%;height:31%}
+.skill4{left:55.7%;top:15.5%;width:22%;height:42%}
+.skill5{right:3.5%;top:4.5%;width:18.5%;height:52%}
+.qgis{left:35.7%;top:30.5%;width:22%;height:31%;opacity:0;pointer-events:none}
+.archive-trigger{left:1.7%;bottom:2.8%;width:35.5%;height:36%}
+.language{right:3.8%;bottom:3.7%;width:39%;height:23.8%}
+
+.panel{
+  position:fixed;
+  z-index:100;
+  right:24px;
+  top:24px;
+  width:min(440px,calc(100vw - 48px));
+  max-height:calc(100vh - 48px);
+  overflow:auto;
+  padding:30px 30px 32px;
+  border-radius:22px;
+  background:rgba(255,255,255,.8);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  box-shadow:0 28px 80px rgba(0,0,0,.16);
+  transform:translateX(calc(100% + 40px));
+  opacity:0;
+  pointer-events:none;
+  transition:transform .38s cubic-bezier(.2,.8,.2,1), opacity .28s ease;
+}
+.panel.open{
+  transform:translateX(0);
+  opacity:1;
+  pointer-events:auto;
+}
+.panel-close{
+  position:absolute;
+  right:14px;
+  top:10px;
+  border:0;
+  background:transparent;
+  font-size:27px;
+}
+.panel h1{font-size:32px;margin:0 0 12px;letter-spacing:-.02em}
+.panel h2{font-size:14px;margin:24px 0 8px;letter-spacing:.12em;text-transform:uppercase}
+.panel p,.panel li{font-size:15px;line-height:1.7}
+
+/* ARCHIVE */
+.archive-overlay{
+  position:fixed;
+  inset:0;
+  z-index:200;
+  background:rgba(243,239,230,.18);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .28s ease;
+}
+.archive-overlay.open{
+  opacity:1;
+  pointer-events:auto;
+}
+.archive-shell{
+  position:absolute;
+  inset:4vh 2.5vw;
+  border-radius:28px;
+  background:rgba(255,255,255,.76);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  box-shadow:0 30px 90px rgba(0,0,0,.14);
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+}
+.archive-header{
+  flex:none;
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  padding:24px 28px 16px;
+  border-bottom:1px solid rgba(0,0,0,.08);
+}
+.archive-kicker{
+  font-size:11px;
+  letter-spacing:.14em;
+  opacity:.5;
+}
+.archive-header h2{
+  margin:4px 0 0;
+  font-size:30px;
+  letter-spacing:-.02em;
+}
+.archive-actions{
+  display:flex;
+  align-items:center;
+  gap:16px;
+}
+.archive-actions span{
+  font-size:11px;
+  letter-spacing:.12em;
+  opacity:.55;
+}
+.archive-actions button{
+  border:0;
+  background:rgba(255,255,255,.8);
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  font-size:24px;
+  line-height:1;
+}
+.archive-track{
+  flex:1;
+  display:flex;
+  align-items:center;
+  gap:80px;
+  overflow-x:auto;
+  overflow-y:hidden;
+  padding:32px 5vw 42px;
+  scroll-behavior:smooth;
+  scrollbar-width:none;
+  cursor:none;
+}
+.archive-track::-webkit-scrollbar{display:none}
+.archive-card{
+  flex:none;
+  width:min(48vw,720px);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:15px;
+}
+.archive-card img{
+  display:block;
+  max-width:100%;
+  max-height:58vh;
+  width:auto;
+  height:auto;
+  object-fit:contain;
+  background:white;
+  box-shadow:0 16px 45px rgba(0,0,0,.11);
+}
+.archive-caption{
+  align-self:flex-start;
+  padding:9px 14px;
+  border-radius:999px;
+  background:rgba(255,255,255,.8);
+  backdrop-filter:blur(9px);
+  -webkit-backdrop-filter:blur(9px);
+  font-size:13px;
+  font-weight:600;
+  letter-spacing:.11em;
+}
+
+.cursor-dot{
+  position:fixed;
+  z-index:9999;
+  left:0;top:0;
+  width:14px;height:14px;
+  border-radius:50%;
+  background:rgba(255,255,255,.98);
+  box-shadow:0 0 0 1px rgba(0,0,0,.08),0 3px 12px rgba(0,0,0,.14);
+  transform:translate(-50%,-50%);
+  pointer-events:none;
+  transition:width .16s ease,height .16s ease,opacity .16s ease;
+}
+.cursor-dot.hovering{width:20px;height:20px}
+.cursor-dot.hidden{opacity:0}
+
+@media (hover:none),(pointer:coarse){
+  body,a,button,.archive-track{cursor:auto}
+  .cursor-dot{display:none}
+}

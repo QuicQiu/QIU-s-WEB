@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Qiuchen Shen — Skills & Interests</title>
+  <link rel="stylesheet" href="./skills.css" />
+</head>
+<body>
+  <main class="stage" id="stage">
+    <img class="background" src="./assets/background.png" alt="" />
+
+    <nav class="top-nav">
+      <a href="/">QS</a>
+      <a href="/">HOME</a>
+      <a href="/profile/profile.html">PROFILE</a>
+      <button class="active">SKILLS</button>
+      <a href="/projects/index.html">WORK</a>
+    </nav>
+
+    <button class="back-scene" id="backScene">BACK TO SCENE ×</button>
+
+
+    <button class="asset skill skill1" data-skill="skill1">
+      <img src="./assets/skill 1.png" alt="Skill 1" />
+      <span class="hover-label">3D MODELING</span>
+    </button>
+
+    <button class="asset skill skill2" data-skill="skill2">
+      <img src="./assets/skill 2.png" alt="Skill 2" />
+      <span class="hover-label">TECHNICAL DRAWING</span>
+    </button>
+
+    <button class="asset skill skill3" data-skill="skill3">
+      <img src="./assets/skill 3.png" alt="Skill 3" />
+      <span class="hover-label">VISUALIZATION & RENDERING</span>
+    </button>
+
+    <button class="asset skill skill4" data-skill="skill4">
+      <img src="./assets/skill 4.png" alt="Skill 4" />
+      <span class="hover-label">GIS MAPPING</span>
+    </button>
+
+    <button class="asset skill skill5" data-skill="skill5">
+      <img src="./assets/skill 5.png" alt="Skill 5" />
+      <span class="hover-label">ENERGY SIMULATION</span>
+    </button>
+
+    <button class="asset qgis" data-skill="qgis">
+      <img src="./assets/qgis.png" alt="QGIS" />
+      <span class="hover-label">QGIS</span>
+    </button>
+
+    <button class="asset archive-trigger" id="archiveTrigger" aria-label="Open archive">
+      <img src="./assets/archive.png" alt="Archive" />
+      <span class="hover-label">OPEN ARCHIVE</span>
+    </button>
+
+    <button class="asset language" data-skill="language">
+      <img src="./assets/language.png" alt="Languages" />
+      <span class="hover-label">LANGUAGES</span>
+    </button>
+
+    <section class="panel" id="panel" aria-hidden="true">
+      <button class="panel-close" id="panelClose">×</button>
+      <div id="panelContent"></div>
+    </section>
+
+    <section class="archive-overlay" id="archiveOverlay" aria-hidden="true">
+      <div class="archive-shell">
+        <header class="archive-header">
+          <div>
+            <div class="archive-kicker">SELECTED WORKING ARCHIVE</div>
+            <h2>ARCHIVE</h2>
+          </div>
+          <div class="archive-actions">
+            <span>SCROLL / DRAG HORIZONTALLY</span>
+            <button id="archiveClose" aria-label="Close archive">×</button>
+          </div>
+        </header>
+
+        <div class="archive-track" id="archiveTrack"></div>
+      </div>
+    </section>
+
+    <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+  </main>
+
+  <script src="./skills.js"></script>
+</body>
+</html>
