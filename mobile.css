@@ -1,0 +1,157 @@
+/* Mobile responsive overrides */
+@media (max-width: 768px) {
+  html, body { min-height: 100%; }
+
+  /* shared navigation */
+  .top-nav {
+    left: 10px !important;
+    right: 10px !important;
+    top: 10px !important;
+    width: auto !important;
+    max-width: calc(100vw - 20px) !important;
+    gap: 8px !important;
+    padding: 8px 10px !important;
+    overflow-x: auto !important;
+    white-space: nowrap !important;
+    scrollbar-width: none;
+  }
+  .top-nav::-webkit-scrollbar { display:none; }
+  .top-nav a, .top-nav button { font-size: 10px !important; letter-spacing: .06em !important; }
+  .back-scene {
+    right: 10px !important;
+    top: 56px !important;
+    padding: 8px 10px !important;
+    font-size: 10px !important;
+    z-index: 90 !important;
+  }
+
+  /* PROFILE — convert collage into a clean vertical mobile grid */
+  body.profile-page { overflow-y:auto !important; overflow-x:hidden !important; background:#f2eee4; }
+  body.profile-page .stage {
+    height:auto !important;
+    min-height:100dvh !important;
+    overflow:visible !important;
+    padding:96px 14px 28px !important;
+    display:grid !important;
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+    gap:18px 14px !important;
+    align-items:start !important;
+  }
+  body.profile-page .background {
+    position:fixed !important;
+    inset:0 !important;
+    object-fit:cover !important;
+    opacity:.95 !important;
+  }
+  body.profile-page .asset {
+    position:relative !important;
+    left:auto !important; right:auto !important; top:auto !important; bottom:auto !important;
+    width:100% !important;
+    height:auto !important;
+    min-height:0 !important;
+    transform:none !important;
+    filter:none !important;
+  }
+  body.profile-page .asset img { width:100% !important; height:auto !important; object-fit:contain !important; }
+  body.profile-page .portfolio,
+  body.profile-page .map { grid-column:1 / -1 !important; }
+  body.profile-page .clock { width:100% !important; }
+  body.profile-page .hover-label { display:none !important; }
+  body.profile-page .panel {
+    left:10px !important; right:10px !important; top:auto !important; bottom:10px !important;
+    width:auto !important; max-height:72dvh !important;
+    border-radius:18px !important;
+  }
+  body.profile-page .pdf-modal { padding:10px !important; }
+  body.profile-page .pdf-shell { width:100% !important; height:92dvh !important; border-radius:16px !important; }
+
+  /* SKILLS — clean vertical grid */
+  body.skills-page { overflow-y:auto !important; overflow-x:hidden !important; background:#f3efe6; }
+  body.skills-page .stage {
+    height:auto !important;
+    min-height:100dvh !important;
+    overflow:visible !important;
+    padding:96px 14px 28px !important;
+    display:grid !important;
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+    gap:18px 14px !important;
+    align-items:start !important;
+  }
+  body.skills-page .background {
+    position:fixed !important;
+    inset:0 !important;
+    object-fit:cover !important;
+    opacity:.95 !important;
+  }
+  body.skills-page .asset {
+    position:relative !important;
+    left:auto !important; right:auto !important; top:auto !important; bottom:auto !important;
+    width:100% !important;
+    height:auto !important;
+    min-height:0 !important;
+    transform:none !important;
+    filter:none !important;
+  }
+  body.skills-page .asset img { width:100% !important; height:auto !important; object-fit:contain !important; }
+  body.skills-page .skill5,
+  body.skills-page .archive-trigger,
+  body.skills-page .language { grid-column:1 / -1 !important; }
+  body.skills-page .qgis { display:none !important; }
+  body.skills-page .hover-label { display:none !important; }
+  body.skills-page .panel {
+    left:10px !important; right:10px !important; top:auto !important; bottom:10px !important;
+    width:auto !important; max-height:72dvh !important;
+    border-radius:18px !important;
+  }
+  body.skills-page .archive-shell { inset:10px !important; border-radius:18px !important; }
+  body.skills-page .archive-header { padding:16px !important; }
+  body.skills-page .archive-header h2 { font-size:24px !important; }
+  body.skills-page .archive-actions span { display:none !important; }
+  body.skills-page .archive-track { gap:28px !important; padding:20px 20px 30px !important; }
+  body.skills-page .archive-card { width:82vw !important; }
+  body.skills-page .archive-card img { max-height:62dvh !important; }
+
+  /* PROJECTS — preserve original composition; swipe horizontally */
+  body.projects-page {
+    overflow:auto !important;
+    background:#f3efe5;
+    -webkit-overflow-scrolling:touch;
+  }
+  body.projects-page .stage {
+    width:1080px !important;
+    height:608px !important;
+    min-width:1080px !important;
+    min-height:608px !important;
+    overflow:hidden !important;
+  }
+  body.projects-page .design-bg { width:1080px !important; height:608px !important; object-fit:cover !important; }
+  body.projects-page .year-nav { top:54% !important; transform:translateY(-50%) scale(.72) !important; transform-origin:center !important; }
+  body.projects-page .year-nav-left { left:4px !important; }
+  body.projects-page .year-nav-right { right:4px !important; }
+  body.projects-page .pdf-shell { inset:8px !important; border-radius:14px !important; }
+  body.projects-page .pdf-head { padding:10px 12px !important; }
+  body.projects-page .pdf-title { max-width:45vw; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  body.projects-page .pdf-stage { padding:8px !important; }
+  body.projects-page .pdf-wrap { width:92vw !important; height:calc(100dvh - 82px) !important; }
+
+  /* HOMEPAGE */
+  body.home-page { overflow:hidden !important; }
+  body.home-page .brand { top:10px !important; left:10px !important; font-size:10px !important; padding:7px 9px !important; }
+  body.home-page .help { right:10px !important; bottom:10px !important; font-size:9px !important; padding:7px 9px !important; }
+  body.home-page .scene-hotspot .dot { width:14px !important; height:14px !important; }
+  body.home-page .scene-hotspot .tag { margin-top:7px !important; padding:5px 8px !important; font-size:10px !important; }
+  body.home-page .scene-jump { font-size:11px !important; gap:6px !important; }
+  body.home-page .scene-jump.left { left:8px !important; }
+  body.home-page .scene-jump.right { right:8px !important; }
+  body.home-page .scene-jump .arrow { font-size:34px !important; }
+}
+
+@media (max-width: 420px) {
+  body.profile-page .stage,
+  body.skills-page .stage { grid-template-columns:1fr !important; }
+  body.profile-page .portfolio,
+  body.profile-page .map,
+  body.skills-page .skill5,
+  body.skills-page .archive-trigger,
+  body.skills-page .language { grid-column:auto !important; }
+}
