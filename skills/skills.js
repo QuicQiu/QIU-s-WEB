@@ -104,7 +104,7 @@ document.addEventListener('keydown', e => {
 archiveTrack.addEventListener('wheel', e => {
   e.preventDefault();
   const delta = Math.abs(e.deltaY) > Math.abs(e.deltaX) ? e.deltaY : e.deltaX;
-  archiveTrack.scrollLeft += delta * 3.2;
+  archiveTrack.scrollLeft += delta * 6.5;
 }, { passive:false });
 
 let dragging = false;
@@ -120,7 +120,7 @@ archiveTrack.addEventListener('pointerdown', e => {
 
 archiveTrack.addEventListener('pointermove', e => {
   if (!dragging) return;
-  archiveTrack.scrollLeft = startScroll - (e.clientX - startX) * 2.2;
+  archiveTrack.scrollLeft = startScroll - (e.clientX - startX) * 4.5;
 });
 
 function stopDrag(e) {
