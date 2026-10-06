@@ -1,3 +1,6 @@
+import * as pdfjsLib from 'pdfjs-dist/build/pdf.mjs';
+pdfjsLib.GlobalWorkerOptions.workerSrc = new URL('pdfjs-dist/build/pdf.worker.mjs', import.meta.url).toString();
+
 const panel=document.querySelector('#panel');
 const panelContent=document.querySelector('#panelContent');
 const panelClose=document.querySelector('#panelClose');
@@ -5,7 +8,9 @@ const backScene=document.querySelector('#backScene');
 const cursorDot=document.querySelector('#cursorDot');
 const clockText=document.querySelector('#clockText');
 const pdfModal=document.querySelector('#pdfModal');
-const pdfFrame=document.querySelector('#pdfFrame');
+const pdfStage=document.querySelector('#pdfStage');
+const pdfPages=document.querySelector('#pdfPages');
+const pdfLoading=document.querySelector('#pdfLoading');
 const pdfTitle=document.querySelector('#pdfTitle');
 const pdfClose=document.querySelector('#pdfClose');
 const pdfZoomIn=document.querySelector('#pdfZoomIn');
@@ -13,7 +18,9 @@ const pdfZoomOut=document.querySelector('#pdfZoomOut');
 const pdfFit=document.querySelector('#pdfFit');
 const pdfZoomLabel=document.querySelector('#pdfZoomLabel');
 let pdfZoom=1;
-
+let currentPdf=null;
+let currentSrc='';
+let renderToken=0;
 
 const content={
   about:`
@@ -74,28 +81,94 @@ const content={
 };
 
 function setPdfZoom(next){
-  pdfZoom=Math.min(2.5,Math.max(.6,next));
-  pdfFrame.style.transform=`scale(${pdfZoom})`;
-  pdfFrame.style.width=`${100/pdfZoom}%`;
-  pdfFrame.style.height=`${100/pdfZoom}%`;
+  pdfZoom=Math.min(2.2,Math.max(.65,next));
   pdfZoomLabel.textContent=`${Math.round(pdfZoom*100)}%`;
+  if(currentPdf) renderPdfPages();
 }
 
-function openPdf(src,title){
+async function renderPdfPages(){
+  if(!currentPdf) return;
+  const token=++renderToken;
+  pdfPages.innerHTML='';
+  pdfLoading.style.display='block';
+
+  const availableWidth=Math.max(280,pdfStage.clientWidth-40);
+
+  try{
+    for(let pageNum=1;pageNum<=currentPdf.numPages;pageNum++){
+      if(token!==renderToken) return;
+      const page=await currentPdf.getPage(pageNum);
+      const baseViewport=page.getViewport({scale:1});
+      const fitScale=Math.min(1.45,availableWidth/baseViewport.width);
+      const viewport=page.getViewport({scale:fitScale*pdfZoom});
+      const dpr=Math.min(window.devicePixelRatio||1,2);
+
+      const pageWrap=document.createElement('div');
+      pageWrap.className='pdf-page-wrap';
+
+      const canvas=document.createElement('canvas');
+      canvas.className='pdf-page-canvas';
+      canvas.width=Math.floor(viewport.width*dpr);
+      canvas.height=Math.floor(viewport.height*dpr);
+      canvas.style.width=`${viewport.width}px`;
+      canvas.style.height=`${viewport.height}px`;
+      canvas.setAttribute('aria-label',`Document page ${pageNum}`);
+
+      const watermark=document.createElement('div');
+      watermark.className='pdf-watermark';
+      watermark.textContent='QIUCHEN SHEN · VIEW ONLY';
+
+      pageWrap.appendChild(canvas);
+      pageWrap.appendChild(watermark);
+      pdfPages.appendChild(pageWrap);
+
+      const ctx=canvas.getContext('2d',{alpha:false});
+      await page.render({
+        canvasContext:ctx,
+        viewport,
+        transform:dpr===1?null:[dpr,0,0,dpr,0,0]
+      }).promise;
+    }
+  }catch(err){
+    console.error(err);
+    pdfPages.innerHTML='<div class="pdf-error">Unable to display this document.</div>';
+  }finally{
+    if(token===renderToken) pdfLoading.style.display='none';
+  }
+}
+
+async function openPdf(src,title){
   closePanel();
+  currentSrc=src;
   pdfTitle.textContent=title;
-  pdfFrame.src=`${src}#toolbar=1&navpanes=0&scrollbar=1&view=FitH`;
-  setPdfZoom(1);
+  pdfZoom=1;
+  pdfZoomLabel.textContent='100%';
+  pdfPages.innerHTML='';
+  pdfLoading.style.display='block';
   pdfModal.classList.add('open');
   pdfModal.setAttribute('aria-hidden','false');
   document.body.classList.add('pdf-open');
+
+  try{
+    const task=pdfjsLib.getDocument({url:src,disableAutoFetch:false,disableStream:false});
+    currentPdf=await task.promise;
+    await renderPdfPages();
+  }catch(err){
+    console.error(err);
+    currentPdf=null;
+    pdfLoading.style.display='none';
+    pdfPages.innerHTML='<div class="pdf-error">Unable to display this document.</div>';
+  }
 }
 
 function closePdf(){
+  renderToken++;
   pdfModal.classList.remove('open');
   pdfModal.setAttribute('aria-hidden','true');
   document.body.classList.remove('pdf-open');
-  setTimeout(()=>{pdfFrame.src='';},250);
+  currentPdf=null;
+  currentSrc='';
+  setTimeout(()=>{pdfPages.innerHTML='';},250);
 }
 
 function openPanel(key){
@@ -129,7 +202,18 @@ pdfZoomIn.addEventListener('click',()=>setPdfZoom(pdfZoom+.15));
 pdfZoomOut.addEventListener('click',()=>setPdfZoom(pdfZoom-.15));
 pdfFit.addEventListener('click',()=>setPdfZoom(1));
 pdfModal.addEventListener('click',e=>{if(e.target===pdfModal)closePdf();});
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(pdfModal.classList.contains('open'))closePdf();else closePanel();}});
+pdfModal.addEventListener('contextmenu',e=>e.preventDefault());
+
+document.addEventListener('keydown',e=>{
+  if(pdfModal.classList.contains('open') && (e.ctrlKey||e.metaKey) && ['s','p'].includes(e.key.toLowerCase())){
+    e.preventDefault();
+    return;
+  }
+  if(e.key==='Escape'){
+    if(pdfModal.classList.contains('open')) closePdf();
+    else closePanel();
+  }
+});
 
 backScene.addEventListener('click',()=>{
   if(history.length>1) history.back();
@@ -145,6 +229,10 @@ function updateClock(){
 }
 updateClock();
 setInterval(updateClock,1000);
+
+window.addEventListener('resize',()=>{
+  if(currentPdf) renderPdfPages();
+});
 
 window.addEventListener('pointermove',e=>{
   cursorDot.style.left=`${e.clientX}px`;
