@@ -7,8 +7,8 @@ html,body{
   color:#111;
   font-family:Arial,Helvetica,sans-serif;
 }
-body{overflow:hidden;cursor:none}
-a,button{font:inherit;color:inherit;cursor:none}
+body{overflow:hidden;cursor:default}
+a,button{font:inherit;color:inherit;cursor:pointer}
 
 .stage{
   position:relative;
@@ -28,7 +28,6 @@ a,button{font:inherit;color:inherit;cursor:none}
   user-select:none;
   pointer-events:none;
 }
-
 
 .top-nav{
   position:fixed;
@@ -113,7 +112,6 @@ a,button{font:inherit;color:inherit;cursor:none}
   transform:translate(-50%,0);
 }
 
-/* composition tuned to reference */
 .skill1{left:2.6%;top:12.8%;width:21.5%;height:43.5%}
 .skill2{left:24%;top:5.5%;width:19%;height:32.5%}
 .skill3{left:35.5%;top:31%;width:22%;height:31%}
@@ -159,7 +157,6 @@ a,button{font:inherit;color:inherit;cursor:none}
 .panel h2{font-size:14px;margin:24px 0 8px;letter-spacing:.12em;text-transform:uppercase}
 .panel p,.panel li{font-size:15px;line-height:1.7}
 
-/* ARCHIVE */
 .archive-overlay{
   position:fixed;
   inset:0;
@@ -195,26 +192,10 @@ a,button{font:inherit;color:inherit;cursor:none}
   padding:24px 28px 16px;
   border-bottom:1px solid rgba(0,0,0,.08);
 }
-.archive-kicker{
-  font-size:11px;
-  letter-spacing:.14em;
-  opacity:.5;
-}
-.archive-header h2{
-  margin:4px 0 0;
-  font-size:30px;
-  letter-spacing:-.02em;
-}
-.archive-actions{
-  display:flex;
-  align-items:center;
-  gap:16px;
-}
-.archive-actions span{
-  font-size:11px;
-  letter-spacing:.12em;
-  opacity:.55;
-}
+.archive-kicker{font-size:11px;letter-spacing:.14em;opacity:.5}
+.archive-header h2{margin:4px 0 0;font-size:30px;letter-spacing:-.02em}
+.archive-actions{display:flex;align-items:center;gap:16px}
+.archive-actions span{font-size:11px;letter-spacing:.12em;opacity:.55}
 .archive-actions button{
   border:0;
   background:rgba(255,255,255,.8);
@@ -223,6 +204,7 @@ a,button{font:inherit;color:inherit;cursor:none}
   border-radius:50%;
   font-size:24px;
   line-height:1;
+  cursor:pointer;
 }
 .archive-track{
   flex:1;
@@ -234,8 +216,9 @@ a,button{font:inherit;color:inherit;cursor:none}
   padding:32px 5vw 42px;
   scroll-behavior:smooth;
   scrollbar-width:none;
-  cursor:none;
+  cursor:grab;
 }
+.archive-track:active{cursor:grabbing}
 .archive-track::-webkit-scrollbar{display:none}
 .archive-card{
   flex:none;
@@ -266,23 +249,5 @@ a,button{font:inherit;color:inherit;cursor:none}
   font-weight:600;
   letter-spacing:.11em;
 }
-
-.cursor-dot{
-  position:fixed;
-  z-index:9999;
-  left:0;top:0;
-  width:14px;height:14px;
-  border-radius:50%;
-  background:rgba(255,255,255,.98);
-  box-shadow:0 0 0 1px rgba(0,0,0,.08),0 3px 12px rgba(0,0,0,.14);
-  transform:translate(-50%,-50%);
-  pointer-events:none;
-  transition:width .16s ease,height .16s ease,opacity .16s ease;
-}
-.cursor-dot.hovering{width:20px;height:20px}
-.cursor-dot.hidden{opacity:0}
-
-@media (hover:none),(pointer:coarse){
-  body,a,button,.archive-track{cursor:auto}
-  .cursor-dot{display:none}
-}
+.cursor-dot{display:none!important}
+@media (hover:none),(pointer:coarse){body,a,button,.archive-track{cursor:auto}}
